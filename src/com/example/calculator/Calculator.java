@@ -2,7 +2,6 @@ package com.example.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Calculator {
 
@@ -26,9 +25,14 @@ public class Calculator {
                     System.out.println("나눗셈 연산에서 분모(두 번째 정수)에 0이 입력될 수 없습니다.");
                 }
                 result = num1 / (double) num2;
-                break;
         }
         return result;
+    }
+
+    public List<Double> addResult(Double result) {
+        results.add(result);
+        System.out.println("결과: " + results);
+        return results;
     }
 
     public List<Double> getResults() {
