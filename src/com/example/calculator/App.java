@@ -1,20 +1,21 @@
 package com.example.calculator;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
-        ArithmeticCalculator calculator = new ArithmeticCalculator();
+        ArithmeticCalculator<Double> calculator = new ArithmeticCalculator<>();
 
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             // 첫 번째, 두 번째 숫자 입력
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            int num1 = sc.nextInt();
+            double num1 = sc.nextDouble();
             System.out.print("두 번째 숫자를 입력하세요: ");
-            int num2 = sc.nextInt();
+            double num2 = sc.nextDouble();
 
             // 사칙연산 기호 입력 후에 char 타입에서 enum 타입으로 형변환
             System.out.print("사칙연산 기호를 입력하세요: ");
@@ -32,6 +33,13 @@ public class App {
             System.out.println("가장 오래된 계산 기록을 삭제하시겠습니까? (yes 입력 시 삭제)");
             if (sc.next().equals("yes")) {
                 calculator.removeResult();
+            }
+
+            // 저장된 연산 결과들 중 Scanner로 입력받은 값보다 큰 결과값들을 출력
+            System.out.println("저장된 연산 결과들 중 입력 받은 값보다 큰 결과값들을 출력하시겠습니까? (yes 입력 시 출력)");
+            if (sc.next().equals("yes")) {
+                List<Double> resultGreaterThan = calculator.getResultGreaterThan(num1, num2);
+                System.out.println("저장된 연산 결과들 중 입력 받은 값보다 큰 결과값: " + resultGreaterThan);
             }
 
             // 더 계산할지 여부 체크 (exit 입력 시 반복문을 즉시 빠져나오고 계산 종료)
