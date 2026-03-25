@@ -20,13 +20,15 @@ public class ArithmeticCalculator<T extends Number> {
         num2 = scanner.nextDouble();
     }
 
-    public void inputOperator() {
+    public boolean inputOperator() {
         try {
             System.out.print("사칙연산 기호를 입력하세요: ");
             op = OperatorType.fromOperator(scanner.next().charAt(0));
+            return true;
         } catch (IllegalArgumentException e) {
             String message = e.getMessage();
             System.out.println(message + " 다시 입력해주세요.");
+            return false;
         }
     }
 
@@ -64,7 +66,7 @@ public class ArithmeticCalculator<T extends Number> {
         results.add(result);
     }
 
-    public void optionPrint() {
+    public boolean optionPrint() {
         System.out.println("==================== 목록 ====================");
         System.out.println("1. 가장 오래된 계산 기록 삭제");
         System.out.println("2. 저장된 연산 결과들 중 입력받은 값보다 큰 결과값들을 출력");
@@ -75,25 +77,23 @@ public class ArithmeticCalculator<T extends Number> {
         switch (scanner.next()) {
             case "1":
                 removeResult();
-                optionPrint();
-                break;
+                return optionPrint();
             case "2":
                 List<Double> resultGreaterThan = getResultGreaterThan(getNum1(), getNum2());
                 System.out.println("입력받은 값보다 큰 결과값 목록: " + resultGreaterThan);
-                break;
+                return optionPrint();
             case "3":
                 System.out.println("현재 저장된 결과: " + getResults());
-                optionPrint();
-                break;
+                return optionPrint();
             case "4":
                 System.out.println("계속 계산을 진행합니다.");
-                break;
+                return true;
             case "exit":
                 System.out.println("계산을 종료합니다.");
-                return;
+                return false;
             default:
                 System.out.println("잘못된 입력 값입니다. 다시 입력해주세요.");
-                optionPrint();
+                return optionPrint();
         }
     }
 
