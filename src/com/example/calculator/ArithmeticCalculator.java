@@ -20,8 +20,7 @@ public class ArithmeticCalculator {
                 break;
             case DIVIDE:
                 if (num2 == 0) {
-                    System.out.println("나눗셈 연산에서 분모(두 번째 정수)에 0이 입력될 수 없습니다.");
-                    return 0;
+                    throw new ArithmeticException("나눗셈 연산에서 분모(두 번째 정수)에 0이 입력될 수 없습니다.");
                 }
                 tmp = num1 / (double) num2;
         }
